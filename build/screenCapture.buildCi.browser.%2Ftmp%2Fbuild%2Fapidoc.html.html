@@ -1,0 +1,429 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/piuccio/cowsay">cowsay (v1.1.9)</a>
+</h1>
+<h4>cowsay is a configurable talking cow</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.cowsay">module cowsay</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.cowsay.list">
+            function <span class="apidocSignatureSpan">cowsay.</span>list
+            <span class="apidocSignatureSpan">(callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.cowsay.say">
+            function <span class="apidocSignatureSpan">cowsay.</span>say
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.cowsay.think">
+            function <span class="apidocSignatureSpan">cowsay.</span>think
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">cowsay.</span>balloon</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">cowsay.</span>cows</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.cowsay.balloon">module cowsay.balloon</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.cowsay.balloon.say">
+            function <span class="apidocSignatureSpan">cowsay.balloon.</span>say
+            <span class="apidocSignatureSpan">(text, wrap)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.cowsay.balloon.think">
+            function <span class="apidocSignatureSpan">cowsay.balloon.</span>think
+            <span class="apidocSignatureSpan">(text, wrap)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.cowsay.cows">module cowsay.cows</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.cowsay.cows.get">
+            function <span class="apidocSignatureSpan">cowsay.cows.</span>get
+            <span class="apidocSignatureSpan">(cow)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.cowsay.cows.list">
+            function <span class="apidocSignatureSpan">cowsay.cows.</span>list
+            <span class="apidocSignatureSpan">(callback)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.cowsay" id="apidoc.module.cowsay">module cowsay</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.cowsay.list" id="apidoc.element.cowsay.list">
+        function <span class="apidocSignatureSpan">cowsay.</span>list
+        <span class="apidocSignatureSpan">(callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">list = function (callback) {
+	fs.readdir(path.join(__dirname, "../cows"), function (err, files) {
+		if (err) return callback(err);
+
+		var cows = files.map(function (cow) {
+			return path.basename(cow, ".cow");
+		});
+
+		return callback(null, cows);
+	});
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+	var think = /think$/.test(argv["$0"]);
+
+	console.log(think ? module.think(argv) : module.say(argv));
+}
+
+function listCows () {
+	require("./index").<span class="apidocCodeKeywordSpan">list</span>(function(err, list) {
+	if (err) throw new Error(err);
+	console.log(list.join("  "));
+  });
+}
+
+function showHelp () {
+	require("optimist").showHelp();
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.cowsay.say" id="apidoc.element.cowsay.say">
+        function <span class="apidocSignatureSpan">cowsay.</span>say
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">say = function (options) {
+	return doIt(options, true);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+## Usage as a module
+
+cowsay can be used as any other npm dependency
+
+var cowsay = require("cowsay");
+
+console.log(cowsay.<span class="apidocCodeKeywordSpan">say</span>({
+	text : "I'm a moooodule",
+	e : "oO",
+	T : "U "
+}));
+
+// or cowsay.think()
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.cowsay.think" id="apidoc.element.cowsay.think">
+        function <span class="apidocSignatureSpan">cowsay.</span>think
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">think = function (options) {
+	return doIt(options, false);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+   console.log(cowsay.say({
+   	text : "I'm a moooodule",
+   	e : "oO",
+   	T : "U "
+   }));
+
+   // or cowsay.<span class="apidocCodeKeywordSpan">think</span>()
+
+````
+_________________
+( I'm a moooodule )
+-----------------
+       o   ^__^
+        o  (oO)\_______
+...</pre></li>
+    </ul>
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.cowsay.balloon" id="apidoc.module.cowsay.balloon">module cowsay.balloon</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.cowsay.balloon.say" id="apidoc.element.cowsay.balloon.say">
+        function <span class="apidocSignatureSpan">cowsay.balloon.</span>say
+        <span class="apidocSignatureSpan">(text, wrap)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">say = function (text, wrap) {
+	delimiters = {
+		first : ["/", "\\"],
+		middle : ["|", "|"],
+		last : ["\\", "/"],
+		only : ["&lt;", "&gt;"]
+	};
+
+	return format(text, wrap, delimiters);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+## Usage as a module
+
+cowsay can be used as any other npm dependency
+
+var cowsay = require("cowsay");
+
+console.log(cowsay.<span class="apidocCodeKeywordSpan">say</span>({
+	text : "I'm a moooodule",
+	e : "oO",
+	T : "U "
+}));
+
+// or cowsay.think()
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.cowsay.balloon.think" id="apidoc.element.cowsay.balloon.think">
+        function <span class="apidocSignatureSpan">cowsay.balloon.</span>think
+        <span class="apidocSignatureSpan">(text, wrap)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">think = function (text, wrap) {
+	delimiters = {
+		first : ["(", ")"],
+		middle : ["(", ")"],
+		last : ["(", ")"],
+		only : ["(", ")"]
+	};
+
+	return format(text, wrap, delimiters);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+   console.log(cowsay.say({
+   	text : "I'm a moooodule",
+   	e : "oO",
+   	T : "U "
+   }));
+
+   // or cowsay.<span class="apidocCodeKeywordSpan">think</span>()
+
+````
+_________________
+( I'm a moooodule )
+-----------------
+       o   ^__^
+        o  (oO)\_______
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.cowsay.cows" id="apidoc.module.cowsay.cows">module cowsay.cows</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.cowsay.cows.get" id="apidoc.element.cowsay.cows.get">
+        function <span class="apidocSignatureSpan">cowsay.cows.</span>get
+        <span class="apidocSignatureSpan">(cow)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">get = function (cow) {
+	var text = textCache[cow];
+
+	if (!text) {
+		var filePath;
+
+		if (cow.match(/\\/) || cow.match(/\//)) {
+			filePath = cow;
+		} else {
+			filePath = path.join(__dirname, "/../cows", cow) + ".cow";
+		}
+		text = fs.readFileSync(filePath, "utf-8");
+		textCache[cow] = text;
+	}
+
+	return function (options) {
+		return replacer(text, options);
+	};
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+exports.think = function (options) {
+	return doIt(options, false);
+};
+
+exports.list = cows.list;
+
+function doIt (options, sayAloud) {
+	var cow = cows.<span class="apidocCodeKeywordSpan">get</span>(options.f || "default");
+	var face = faces(options);
+	face.thoughts = sayAloud ? "\\" : "o";
+
+	var action = sayAloud ? "say" : "think";
+	return baloon[action](options.text || options._.join(" "), options.n ? null : options.W) + "\n" + cow(face);
+}
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.cowsay.cows.list" id="apidoc.element.cowsay.cows.list">
+        function <span class="apidocSignatureSpan">cowsay.cows.</span>list
+        <span class="apidocSignatureSpan">(callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">list = function (callback) {
+	fs.readdir(path.join(__dirname, "../cows"), function (err, files) {
+		if (err) return callback(err);
+
+		var cows = files.map(function (cow) {
+			return path.basename(cow, ".cow");
+		});
+
+		return callback(null, cows);
+	});
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+	var think = /think$/.test(argv["$0"]);
+
+	console.log(think ? module.think(argv) : module.say(argv));
+}
+
+function listCows () {
+	require("./index").<span class="apidocCodeKeywordSpan">list</span>(function(err, list) {
+	if (err) throw new Error(err);
+	console.log(list.join("  "));
+  });
+}
+
+function showHelp () {
+	require("optimist").showHelp();
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
